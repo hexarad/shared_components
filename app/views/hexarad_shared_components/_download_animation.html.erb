@@ -1,0 +1,31 @@
+<div id="download-section" data-controller="download-animation">
+  <!-- Download Button -->
+  <%= link_to download_path, 
+              class: "btn btn-download-report",
+              data: { 
+                "download-animation-target": "button",
+                action: "click->download-animation#download" 
+              } do %>
+    <%= download_text %>
+  <% end %>
+  
+  <!-- Downloading Animation State -->
+  <div class="download-dots d-none" data-download-animation-target="downloadingState">
+    <div class="dots-container">
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+      <div class="dot" data-download-animation-target="dots"></div>
+    </div>
+  </div>
+  
+  <!-- Complete State -->
+  <div class="download-complete d-none" data-download-animation-target="completeState">
+    <span class="complete-text">Download complete</span>
+  </div>
+</div>

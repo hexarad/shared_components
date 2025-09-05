@@ -1,0 +1,11 @@
+<%= form_with url: "#", method: :get, local: true, html: { class: "search-form" } do |f| %>
+  <div style="max-width: 400px; padding: 20px;">
+    <%= render "hexarad_shared_components/inputs/search_input",
+      form: f,
+      field_name:,
+      label_text:,
+      placeholder:,
+      value:
+    %>
+  </div>
+<% end %>

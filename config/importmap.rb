@@ -1,0 +1,2 @@
+# Pin HexaradSharedComponents JavaScript modules
+pin_all_from File.expand_path("../app/javascript/hexarad_shared_components/controllers", __dir__), under: "hexarad_shared_components/controllers", to: "hexarad_shared_components/controllers"

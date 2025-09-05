@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hexarad Shared Components</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag "hexarad_shared_components/application", media: "all", "data-turbo-track": "reload" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+      import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+      window.Stimulus = Application.start()
+      
+      // Demo download animation controller for Lookbook preview
+      class DownloadAnimationController extends Controller {
+        static targets = ["button", "downloadingState", "completeState", "dots"]
+        
+        connect() {
+          this.animationFrame = null
+          this.startTime = null
+        }
+        
+        disconnect() {
+          if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame)
+          }
+        }
+        
+        download(event) {
+          event.preventDefault()
+          
+          // Show downloading animation
+          this.showDownloadingState()
+          
+          // Simulate download for 3 seconds
+          setTimeout(() => {
+            this.showCompleteState()
+            
+            // Create and download a test file
+            const blob = new Blob(['Never thought I\'d die fighting side by side with an elf.\nHow about side by side with a friend?\nAye, I could do that'], { type: 'text/plain' })
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = 'test-download.txt'
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+            URL.revokeObjectURL(url)
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+              this.resetToButton()
+            }, 2000)
+          }, 3000)
+        }
+        
+        showDownloadingState() {
+          this.buttonTarget.classList.add("d-none")
+          this.downloadingStateTarget.classList.remove("d-none")
+          this.completeStateTarget.classList.add("d-none")
+          this.startDotsAnimation()
+        }
+        
+        showCompleteState() {
+          this.stopAnimation()
+          this.downloadingStateTarget.classList.add("d-none")
+          this.completeStateTarget.classList.remove("d-none")
+        }
+        
+        resetToButton() {
+          this.completeStateTarget.classList.add("d-none")
+          this.buttonTarget.classList.remove("d-none")
+        }
+        
+        startDotsAnimation() {
+          this.startTime = Date.now()
+          
+          const colorPattern = [
+            '#011a23', '#ffc800', '#00baff', '#011a23', 
+            '#ffc800', '#00baff', '#011a23', '#ffffff', '#ffffff'
+          ]
+          
+          const extendedColors = [...colorPattern, ...colorPattern, ...colorPattern]
+          const dots = this.dotsTargets
+          
+          let frameCount = 0
+          const frameDelay = 250
+          
+          const animate = () => {
+            const elapsed = Date.now() - this.startTime
+            const currentFrame = Math.floor(elapsed / frameDelay)
+            
+            if (currentFrame !== frameCount) {
+              frameCount = currentFrame
+              
+              dots.forEach((dot, index) => {
+                const colorIndex = (index - frameCount) % extendedColors.length
+                const adjustedIndex = colorIndex < 0 ? colorIndex + extendedColors.length : colorIndex
+                const color = extendedColors[adjustedIndex]
+                dot.style.backgroundColor = color
+                
+                if (color === '#ffffff') {
+                  dot.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)'
+                } else {
+                  dot.style.boxShadow = `0 2px 8px ${color}40`
+                }
+              })
+            }
+            
+            this.animationFrame = requestAnimationFrame(animate)
+          }
+          
+          animate()
+        }
+        
+        stopAnimation() {
+          if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame)
+            this.animationFrame = null
+          }
+          
+          const dots = this.dotsTargets
+          dots.forEach(dot => {
+            dot.style.backgroundColor = '#d0d0d0'
+            dot.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)'
+          })
+        }
+      }
+      
+      // Tooltip controller
+      class TooltipController extends Controller {
+        static targets = [ "tooltip" ]
+        
+        tooltipTargetConnected(element) {
+          return new bootstrap.Tooltip(element, {
+            delay: { show: 0, hide: 1000 }
+          })
+        }
+      }
+      
+      Stimulus.register("download-animation", DownloadAnimationController)
+      Stimulus.register("tooltip", TooltipController)
+    </script>
+  </head>
+
+  <body>
+    <div style="padding: 2rem;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

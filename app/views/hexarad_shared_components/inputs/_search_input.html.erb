@@ -1,0 +1,16 @@
+<%# Required parameters: form, label_text, field_name %>
+<%# Optional parameters: placeholder, value, data %>
+
+<div class="mb-0">
+  <%= form.label field_name, label_text, class: "form-label text-uppercase" %>
+  <div class="input-group">
+    <%= form.text_field field_name, 
+      class: "form-control",
+      placeholder: local_assigns[:placeholder] || "",
+      value: local_assigns[:value],
+      data: local_assigns[:data] || {} %>
+    <span class="input-group-text bg-white">
+      <i class="fa fa-search text-muted"></i>
+    </span>
+  </div>
+</div>

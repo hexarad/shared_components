@@ -1,0 +1,16 @@
+project_name: "Hexarad Shared Components"
+
+preview_paths:
+  - "test/components/previews"
+  - "app/views/hexarad_shared_components/previews"
+
+page_paths:
+  - "app/views/hexarad_shared_components/docs"
+
+ui:
+  theme: "blue"
+  favicon: false
+
+preview_display_options:
+  theme: light
+  max_width: 100%

@@ -1,0 +1,19 @@
+// Hexarad Shared Components Stylesheet
+// =====================================
+// This file imports all shared component styles
+
+// Variables (to be overridden by host application if needed)
+$link-blue: #007fb0 !default;
+$text-primary: #333333 !default;
+$text-secondary: #666666 !default;
+$text-muted: #999999 !default;
+$border-default: #dee2e6 !default;
+$border-light: #c9ccd3 !default;
+$focus-color: #007fb0 !default;
+$bg-light: #f5f5f5 !default;
+
+// Import all component styles
+@import "components/button";
+@import "components/info_card";
+@import "components/search_input";
+@import "components/download_animation";

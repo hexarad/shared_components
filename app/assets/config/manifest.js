@@ -1,0 +1,1 @@
+//= link hexarad_shared_components/application.css.scss

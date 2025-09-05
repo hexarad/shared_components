@@ -1,0 +1,87 @@
+// Download Animation Component Styles
+// ====================================
+
+.btn-download-report {
+  padding: 10px 0;
+  border-radius: 3px;
+  border: solid 1px #007fb0;
+  background-color: #fff;
+  color: #007fb0;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-width: 184px;
+  
+  &:hover {
+    color: #007fb0;
+    text-decoration: none;
+    background-color: #f8f9fa;
+  }
+  
+  &:focus {
+    color: #007fb0;
+    text-decoration: none;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 127, 176, 0.25);
+  }
+}
+
+// In-Place Download Animation
+#download-section {
+  display: inline-block;
+  min-width: 184px; // Same as button width
+  min-height: 44px; // Same as button height
+}
+
+.download-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 184px; // Same as button width
+  height: 44px; // Same as button height
+  
+  .dots-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d0d0d0; // Default neutral color
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    opacity: 1;
+  }
+}
+
+.download-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 184px; // Same as button width
+  height: 44px; // Same as button height
+  
+  .complete-text {
+    font-size: 16px;
+    font-weight: normal;
+    color: #00853c;
+    letter-spacing: 0.5px;
+    animation: successAppear 0.5s ease-out;
+  }
+}
+
+@keyframes successAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

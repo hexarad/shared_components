@@ -1,0 +1,21 @@
+<%
+  # Determine CSS class based on variant
+  variant = local_assigns[:variant] || "primary"
+  css_class = variant == "secondary" ? "cancel-button" : "primary-btn"
+  
+  # Build html options
+  html_options = {
+    class: css_class,
+    disabled: local_assigns[:disabled],
+    data: local_assigns[:data],
+    onclick: local_assigns[:onclick]
+  }.compact
+%>
+
+<% if local_assigns[:form] %>
+  <%= form.submit text, html_options %>
+<% elsif local_assigns[:path] %>
+  <%= link_to text, path, html_options %>
+<% else %>
+  <%= button_tag text, html_options %>
+<% end %>

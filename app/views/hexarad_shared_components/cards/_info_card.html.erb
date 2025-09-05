@@ -1,0 +1,46 @@
+<%
+    # Build wrapper CSS classes
+  wrapper_classes = []
+wrapper_classes << local_assigns[:css_class] if local_assigns[:css_class]
+%>
+
+<div class="<%= wrapper_classes.join(' ') %>">
+  <% if local_assigns[:title] %>
+    <h5 class="clinical-feedback-title"><%= title %></h5>
+  <% end %>
+  <div class="study-details-card" style="padding: 1rem">
+    <% if local_assigns[:content] %>
+      <!-- Content variant: display single value with detail-value styling -->
+      <p class="detail-value" style="font-size: 12px !important; margin-bottom: 0;">
+      <%= content %>
+      </p>
+    <% else %>
+      <!-- Details variant: display key-value pairs in table -->
+      <table class="study-details-table">
+        <% details.each do |detail| %>
+          <%
+              # Check if value is long enough for tooltip
+            value_text = strip_tags(detail[:value].to_s)
+          needs_tooltip = value_text.length > 22
+
+          # Build tooltip attributes conditionally
+          tooltip_attrs = if needs_tooltip
+                            {
+                              'data-controller': 'tooltip',
+                              'data-tooltip-target': 'tooltip',
+                              'data-bs-placement': 'right',
+                              'title': value_text
+                            }
+                          else
+                            {}
+                          end
+                        %>
+                      <tr>
+                        <td class="detail-label"><strong><%= detail[:label] %></strong></td>
+                        <td class="detail-value" <%= tooltip_attrs.map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>><%= detail[:value] %></td>
+                      </tr>
+                    <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>

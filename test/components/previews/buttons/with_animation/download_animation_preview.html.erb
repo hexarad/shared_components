@@ -1,0 +1,7 @@
+<div style="display: flex; flex-direction: column; gap: 20px;">
+  <% (@items || []).each do |item| %>
+    <%= render "hexarad_shared_components/download_animation",
+        download_path: "#",
+        download_text: item %>
+  <% end %>
+</div>

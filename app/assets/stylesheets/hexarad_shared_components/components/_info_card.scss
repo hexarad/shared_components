@@ -1,0 +1,72 @@
+// Info Card Component Styles
+// ===========================
+
+.clinical-feedback-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px !important;
+}
+
+.study-details-card {
+  background-color: $bg-light;
+  border: solid 1px $border-light;
+  border-radius: 3px;
+  padding: 12px 0;
+  width: 500px;
+  flex-shrink: 0;
+
+  .study-details-table {
+    width: 100%;
+
+    tr {
+      border: none;
+    }
+
+    td {
+      padding: 8px 0 8px 30px;
+      font-size: 12px;
+      border: none;
+
+      &.detail-label {
+        width: 200px;
+        color: $text-primary;
+        font-weight: normal;
+
+        strong {
+          font-weight: 600;
+        }
+      }
+
+      &.detail-value {
+        color: $text-primary;
+        font-weight: normal;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+        padding-right: 30px;
+      }
+    }
+  }
+}
+
+// Tooltip styling for info cards
+.tooltip { 
+  margin-top: -10px !important;
+
+  .tooltip-inner {
+    color: #ffc800 !important;
+    font-size: 12px;
+    padding-bottom: 5px;
+    max-width: 250px;
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before,
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before,
+.tooltip.bs-tooltip-start .tooltip-arrow::before,
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-color: transparent !important;
+}
