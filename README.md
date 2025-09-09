@@ -2,13 +2,6 @@
 
 A Rails engine containing reusable UI components for Hexarad applications.
 
-## Components
-
-- **Button**: Primary and secondary button variants
-- **Info Card**: Display information in a card format
-- **Search Input**: Styled search input with icon
-- **Download Animation**: Animated download button with progress indicator
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -37,11 +30,17 @@ In your main stylesheet:
 
 #### 2. Import JavaScript Controllers
 
-In your Stimulus controllers index:
+In your importmap:
+
+```ruby
+pin "hexarad_shared_components", to: "hexarad_shared_components.js"
+pin_all_from "hexarad_shared_components/app/javascript/hexarad_shared_components", under: "hexarad_shared_components", to: "hexarad_shared_components"
+```
+
+In your application.js:
 
 ```javascript
-import { DownloadAnimationController } from "hexarad_shared_components/controllers/download_animation_controller"
-application.register("download-animation", DownloadAnimationController)
+import "hexarad_shared_components"
 ```
 
 #### 3. Use Components in Views
