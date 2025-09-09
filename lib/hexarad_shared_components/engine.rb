@@ -24,7 +24,7 @@ module HexaradSharedComponents
       js_files = Dir[Engine.root.join('app', 'javascript', '**', '*.js')]
       js_files.each do |file|
         relative_path = Pathname.new(file).relative_path_from(Engine.root.join('app', 'javascript'))
-        app.config.assets.precompile << "hexarad_shared_components/#{relative_path}"
+        app.config.assets.precompile << relative_path.to_s
       end
     end
 
