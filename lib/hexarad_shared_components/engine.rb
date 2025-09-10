@@ -21,7 +21,7 @@ module HexaradSharedComponents
       app.config.assets.precompile << 'hexarad_shared_components.js'
 
       # Automatically include all JavaScript files from the engine
-      js_files = Dir[Engine.root.join('app', 'javascript', '**', '*.js')]
+      js_files = Dir[Engine.root.join('app', 'javascript', 'hexarad_shared_components', '**', '*.js')]
       js_files.each do |file|
         relative_path = Pathname.new(file).relative_path_from(Engine.root.join('app', 'javascript'))
         app.config.assets.precompile << relative_path.to_s
